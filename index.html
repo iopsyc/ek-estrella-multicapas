@@ -1,7 +1,4 @@
-from pathlib import Path
-
-# HTML completo con integración del link de SoundCloud, estrella, luces glitch y escobita
-html_code = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -84,11 +81,12 @@ html_code = """<!DOCTYPE html>
       color: white;
       z-index: 1;
       text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff;
+      transform: perspective(800px) translateZ(0);
     }
 
     @keyframes fall {
-      0% { transform: translateY(-50px); opacity: 1; }
-      100% { transform: translateY(110vh); opacity: 0; }
+      0% { transform: translateY(-50px) perspective(800px) translateZ(0); opacity: 1; }
+      100% { transform: translateY(110vh) perspective(800px) translateZ(0); opacity: 0; }
     }
 
     .button-group {
@@ -118,19 +116,11 @@ html_code = """<!DOCTYPE html>
 
     #estrella-musical {
       position: absolute;
-      top: 60px;
-      left: 50%;
-      transform: translateX(-50%);
+      bottom: 30px;
+      left: 30px;
       font-size: 2.5rem;
       cursor: pointer;
       z-index: 10;
-      animation: pulseStar 2s infinite;
-    }
-
-    @keyframes pulseStar {
-      0% { transform: translateX(-50%) scale(1); }
-      50% { transform: translateX(-50%) scale(1.2); }
-      100% { transform: translateX(-50%) scale(1); }
     }
 
     #luces-magicas {
@@ -193,11 +183,10 @@ html_code = """<!DOCTYPE html>
   </div>
 
   <div id="luces-magicas"></div>
-
   <div id="estrella-musical">⭐</div>
 
-  <iframe id="reproductor-soundcloud" style="display:none;" allow="autoplay" 
-    width="0" height="0" frameborder="no" src="">
+  <iframe id="reproductor-soundcloud"
+    allow="autoplay" width="0" height="0" frameborder="no">
   </iframe>
 
   <script>
@@ -235,10 +224,10 @@ html_code = """<!DOCTYPE html>
     const luces = document.getElementById('luces-magicas');
 
     estrella.addEventListener('click', () => {
-      reproductor.src = "https://soundcloud.com/readingdiscx/tr-p-m-riachi?si=04fc49fcbf6e4bafb50704d0f020112c&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing;
-      reproductor.style.display = "none";
+      reproductor.style.display = 'block';
+      reproductor.src = "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/readingdiscx/tr-p-m-riachi&auto_play=true&visual=false";
       luces.classList.add('activar-luces');
-      estrella.style.display = "none";
+      estrella.style.display = 'none';
     });
 
     document.addEventListener('mousemove', (e) => {
@@ -252,9 +241,3 @@ html_code = """<!DOCTYPE html>
   </script>
 </body>
 </html>
-"""
-
-# Guardar archivo HTML
-output_path = "/mnt/data/EK_3D_Glitch_Integrado_SoundCloud.html"
-Path(output_path).write_text(html_code, encoding="utf-8")
-output_path
