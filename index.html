@@ -1,5 +1,3 @@
-# Corregir la posición de la escobita para que esté sola en la esquina inferior derecha
-html_code = """
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -155,6 +153,12 @@ html_code = """
       font-size: 2rem;
       cursor: pointer;
       z-index: 10;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    #escoba-btn:hover {
+      transform: scale(1.2) rotate(-10deg);
+      filter: drop-shadow(0 0 6px #0f0) contrast(150%);
     }
   </style>
 </head>
@@ -179,11 +183,9 @@ html_code = """
   </div>
 
   <div id="luces-magicas"></div>
-
   <div id="estrella-musical">⭐</div>
 
-  <iframe id="reproductor-soundcloud" style="display: none;" 
-    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/readingdiscx/tr-p-m-riachi&auto_play=true&visual=false"
+  <iframe id="reproductor-soundcloud"
     allow="autoplay" width="0" height="0" frameborder="no">
   </iframe>
 
@@ -223,6 +225,7 @@ html_code = """
 
     estrella.addEventListener('click', () => {
       reproductor.style.display = 'block';
+      reproductor.src = "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/readingdiscx/tr-p-m-riachi&auto_play=true&visual=false";
       luces.classList.add('activar-luces');
       estrella.style.display = 'none';
     });
@@ -238,10 +241,3 @@ html_code = """
   </script>
 </body>
 </html>
-"""
-
-with open("/mnt/data/EK_3D_Glitch_Multicapas_ESC_corner.html", "w", encoding="utf-8") as f:
-    f.write(html_code)
-
-"/mnt/data/EK_3D_Glitch_Multicapas_ESC_corner.html"
-
